@@ -29,7 +29,7 @@
 
             <div>
                 <label for="price">Price: </label>
-                <input id="price" type="number" step="0.01" formControlName="price">
+                <input id="price" type="number" step="0.05" formControlName="price">
                 <small *ngIf="productForm.get('price')?.hasError('required')">
                     This field is required.
                 </small>
@@ -41,8 +41,8 @@
                     This field is required.
                 </small>
             </div>
-
             <button type="submit" [disabled]="!productForm.valid">{{btnSubmit}}</button>
         </form>
+        <button type="text"  *ngIf="!isNew" (click)="onDelete()" >Delete</button>           
     </div>
 </div>

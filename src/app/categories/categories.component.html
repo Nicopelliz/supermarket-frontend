@@ -1,7 +1,7 @@
 <div id="category-list">
     <h3>Categories</h3>
     <ul *ngFor="let category of categories">
-        <li><button class="category-button" (click)="onSelect(category)">{{category.category1}}</button></li>    
+        <li><button class="category-button" (click)="onSelect(category)">{{category.category1}}</button><button (click)="onDelete(category.category1)">Delete</button></li>    
     </ul>
 </div>
 <div>

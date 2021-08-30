@@ -26,4 +26,9 @@ export class CategoriesServiceService {
   getCategoriesProva():Category[]{
     return this.categories
   }
+
+  deleteCategory(category: string): Observable<unknown> {
+    console.log(category)
+    return this.http.delete(this.URL + "/" + category)
+  }
 }

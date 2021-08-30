@@ -10,17 +10,19 @@ import { Product, ProductsServiceService } from '../services/products-service.se
 })
 export class ProductDetailComponent implements OnInit {
 
+
   searchedId: string = "new-product"
-  title: string= ""
+  title: string = ""
   products: Product[] = []
   btnSubmit: string = ""
-
+  isNew:boolean = true
+  
   constructor(
     private formBuilder: FormBuilder,
     private productService: ProductsServiceService,
-    private route:ActivatedRoute,
-    private router:Router) { }
-
+    private route: ActivatedRoute,
+    private router: Router) { }
+  
   productForm: FormGroup = this.formBuilder.group({
     name: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
     code: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(8)])],
@@ -31,43 +33,43 @@ export class ProductDetailComponent implements OnInit {
   ngOnInit(): void {
 
     this.products = this.productService.getProductsProva()
-
     this.searchedId = this.route.snapshot.paramMap.get('id')!
 
-    if(this.searchedId !== "new-product") {
-      this.title =  "Edit Product"
+    if (this.searchedId !== "new-product") {
+      this.title = "Edit Product"
       this.btnSubmit = "Save"
-      
-    this.productService.getProductDetail(+this.searchedId)
-      .subscribe((data: Product) => {
-        this.productForm.patchValue(data); 
-      });
+      this.isNew = false
+      this.productService.getProductDetail(+this.searchedId)
+        .subscribe((data: Product) => {
+          this.productForm.patchValue(data);
+        });
 
     } else {
       this.title = "Create Product"
-      this.btnSubmit = "Create"  
+      this.btnSubmit = "Create"
     }
+  }
+
+  onDelete(){
+    this.productService.deleteProduct(this.searchedId).subscribe();
+    this.router.navigate(['/products'])
+  }
   
-  }
-
-  goToProductPage(){
-    this.router.navigate(["../../"],{relativeTo: this.route})
-  }
-
   onSubmit() {
-      
-    this.productService.saveProduct({
-      id: this.searchedId !== 'new' ? this.searchedId : undefined,
-      ...this.productForm.value
-    }).subscribe({
+    this.productService.saveProduct(this.searchedId, this.productForm.value,  this.isNew).subscribe( {
       next: (result) => {
-        console.log('result', result)
-        this.router.navigate(['/products'])
-      },
-      error: (error) => {
+          console.log('result', result)
+          //Reindirizzo alla lista
+          this.router.navigate(['/products'])
+    },
+    error: (error) => {
         console.error(error)
         alert('Save data error');
-      }
-    })
-  }  
+    }
+  })
+}
+
+  goToProductPage() {
+    this.router.navigate(["../../"], { relativeTo: this.route })
+  }
 }

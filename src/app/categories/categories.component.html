@@ -1,0 +1,30 @@
+<div>
+    <h3>Categories</h3>
+    <div *ngFor="let category of categories">{{category.name}} {{category.description}}</div>
+</div>
+<div>
+    <h3>Details</h3>
+    <div class="container">
+        <form [formGroup]="categoriesForm" (ngSubmit)="onSubmit()">
+            <p>{{categoriesForm.value | json}}</p>
+            <label for="name">Category: </label>
+            <input id="name" type="text" formControlName="name">
+            <small *ngIf="categoriesForm.get('firstName')?.hasError('required')">
+                This field is required.
+            </small>
+            <small *ngIf="categoriesForm.get('name')?.hasError('minlength')">
+                The minimum length for this field is {{categoriesForm.get('name')?.errors?.minlength.requiredLength}}
+                characters.
+            </small>
+    
+            <label for="description">Description: </label>
+            <input id="description" type="text" formControlName="description">
+            <small *ngIf="categoriesForm.get('description')?.hasError('minlength')">
+                The minimum length for this field is {{categoriesForm.get('description')?.errors?.minlength.requiredLength}}
+                characters.
+            </small>
+
+            <button type="submit" [disabled]="!categoriesForm.valid">Submit</button>   
+        </form>
+    </div>
+</div>

@@ -16,16 +16,20 @@ export class CategoriesComponent implements OnInit {
     private categoryService: CategoriesServiceService) { }
 
   categoriesForm: FormGroup = this.formBuilder.group({
-    name: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
+    category1: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
     description: ['', Validators.minLength(10)],
   })
 
   ngOnInit(): void {
     
-    // this.categoryService.getCategories()
-    //   .subscribe((data: Category[]) => this.categories = data);
+    this.categoryService.getCategories()
+      .subscribe((data: Category[]) => this.categories = data);
+  }
 
-    this.categories = this.categoryService.getCategoriesProva()
+  
+
+  onSelect(category:Category){
+    this.categoriesForm.patchValue(category)
   }
 
   onSubmit() {

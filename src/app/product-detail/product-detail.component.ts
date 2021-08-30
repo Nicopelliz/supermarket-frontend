@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Product, ProductsServiceService } from '../services/products-service.service';
 
 @Component({
@@ -10,14 +10,16 @@ import { Product, ProductsServiceService } from '../services/products-service.se
 })
 export class ProductDetailComponent implements OnInit {
 
-  searchedId: string = ""
+  searchedId: string = "new-product"
   title: string= ""
   products: Product[] = []
+  btnSubmit: string = ""
 
   constructor(
     private formBuilder: FormBuilder,
     private productService: ProductsServiceService,
-    private route:ActivatedRoute) { }
+    private route:ActivatedRoute,
+    private router:Router) { }
 
   productForm: FormGroup = this.formBuilder.group({
     name: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
@@ -27,34 +29,45 @@ export class ProductDetailComponent implements OnInit {
   })
 
   ngOnInit(): void {
-    
-    // this.categoryService.getCategories()
-    //   .subscribe((data: Category[]) => this.categories = data);
 
     this.products = this.productService.getProductsProva()
 
     this.searchedId = this.route.snapshot.paramMap.get('id')!
 
-    if(this.searchedId !== "") {
-      this.title =  'Edit Detail Page'
-      // v1
+    if(this.searchedId !== "new-product") {
+      this.title =  "Edit Product"
+      this.btnSubmit = "Save"
       
-/*
-      // v2
-      this.todoService.getDetailData(+this.requestId)
-        .subscribe((data: Todo) => {
-          this.todoForm.patchValue(data); 
-        });
-*/
+    this.productService.getProductDetail(+this.searchedId)
+      .subscribe((data: Product) => {
+        this.productForm.patchValue(data); 
+      });
+
     } else {
-      this.title = 'Create Detail Page'
-      
+      this.title = "Create Product"
+      this.btnSubmit = "Create"  
     }
   
   }
 
-  onSubmit() {
-    console.log(this.productForm.value.name);
-    console.log(this.productForm.value);
+  goToProductPage(){
+    this.router.navigate(["../../"],{relativeTo: this.route})
   }
+
+  onSubmit() {
+      
+    this.productService.saveProduct({
+      id: this.searchedId !== 'new' ? this.searchedId : undefined,
+      ...this.productForm.value
+    }).subscribe({
+      next: (result) => {
+        console.log('result', result)
+        this.router.navigate(['/products'])
+      },
+      error: (error) => {
+        console.error(error)
+        alert('Save data error');
+      }
+    })
+  }  
 }

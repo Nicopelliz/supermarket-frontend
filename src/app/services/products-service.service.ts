@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Category } from './categories-service.service';
 
 export interface Product{
@@ -16,6 +17,9 @@ export interface Product{
   providedIn: 'root'
 })
 export class ProductsServiceService {
+
+
+  URL = "https://localhost:5001/api/articles"
 
   products: Product[] =[
     {
@@ -51,7 +55,23 @@ export class ProductsServiceService {
     return this.products
   }
 
-  getProductDetail(id:number):Product{
-    return this.products[id-1]
+  getProducts():Observable<Product[]>{
+    return this.http.get<Product[]>(this.URL)
+  }
+
+  getProductDetail(id:number):Observable<Product>{
+    return this.http.get<Product>(this.URL+"/"+id)
+  }
+
+  deleteProduct(id:number):Observable<Product>{
+    return this.http.delete<Product>(this.URL+"/"+id)
+  }
+
+  saveProduct(data: Product) {
+    if(data.id) {
+      return this.http.put(this.URL+'/'+data.id, data)
+    } else {
+      return this.http.post(this.URL, data)
+    }
   }
 }

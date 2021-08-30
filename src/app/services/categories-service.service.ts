@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 export interface Category{
   id:number
-  name:string
+  category1:string
   description?:string
 }
 
@@ -13,33 +13,9 @@ export interface Category{
 })
 export class CategoriesServiceService {
 
-  categories:Category[]=[
-    {
-      "id":1,
-      "name":"A",
-      "description":"prodotti alimentari freschi"
-  },
-  {
-      "id":2,
-      "name":"B",
-      "description":"prodotti cosmetici"
-  },
-  {
-      "id":3,
-      "name":"C"
-  },
-  {
-      "id":4,
-      "name":"D"
-  },
-  {
-      "id":5,
-      "name":"E",
-      "description":"prodotti"
-  }
-  ]
+  categories:Category[]=[]
 
-  public URL = "http://127.0.0.1:3200/categories.json"
+  public URL = "https://localhost:5001/api/categories"
 
   constructor(private http:HttpClient ) {}
 

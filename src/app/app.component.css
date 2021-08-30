@@ -1,0 +1,29 @@
+nav, footer{
+    background-color: rgba(85, 181, 177, 0.8);
+}
+
+nav{
+    height: 80px;
+    padding: 20px;    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+#main{
+    width: 100%;
+    flex: 1;
+    font-size: larger;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(212, 238, 238);
+    
+}
+footer{
+    height: 45px;
+    padding: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

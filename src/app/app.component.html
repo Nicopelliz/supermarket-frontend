@@ -1,9 +1,17 @@
-<div class="wrapper">
+
   
-  <nav>
-    <h1 class="title">Il tuo Supermercato</h1>
-    <a routerLink="products" routerLinkActive="active">products</a>
-    <a routerLink="categories" routerLinkActive="active">categories</a>
-  </nav>
-  <router-outlet></router-outlet>
-</div>
+    <nav>
+      <h1 class="title">Your Favourite Supermarket</h1>
+      <div>
+        <a routerLink="products" routerLinkActive="active">Products</a>
+        <a routerLink="categories" routerLinkActive="active">Categories</a>
+
+      </div>
+    </nav>
+  
+ <div id="main">
+
+   <router-outlet></router-outlet>
+ </div>
+
+  <footer>copyright 2021 My Beautiful Supermarket</footer>

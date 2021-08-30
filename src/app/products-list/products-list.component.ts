@@ -16,7 +16,12 @@ export class ProductsListComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.products = this.productService.getProductsProva()
+    this.productService.getProducts()
+    .subscribe((data)=>this.products=data)
+  }
+
+  createProduct() {
+    this.router.navigate(['products/detail', 'new-product'])
   }
 
   getDetail(product:Product){

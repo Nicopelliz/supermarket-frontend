@@ -1,0 +1,12 @@
+.category-button{
+    background-color: white;
+    border: 0.5px solid white;
+    width:100%;
+    border-radius: 3px;
+    text-align: start;
+}
+
+.category-button:hover{
+    border: 0.5px solid rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.01);
+}

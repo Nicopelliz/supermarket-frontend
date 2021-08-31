@@ -1,5 +1,6 @@
 <button (click)="createProduct()">Create new product</button>
+<input type="text" [formControl]="search"> <button (click)="onSearch()">search</button>
 <ul *ngFor="let product of products">
-    <li >{{product.name}}</li>
+    <li >{{product.name}} - {{product.price}}$</li>
     <button (click)="getDetail(product)">Detail</button>
 </ul>

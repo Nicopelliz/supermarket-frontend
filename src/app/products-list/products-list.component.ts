@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Product, ProductsServiceService } from '../services/products-service.service';
 
@@ -10,13 +11,19 @@ import { Product, ProductsServiceService } from '../services/products-service.se
 export class ProductsListComponent implements OnInit {
 
   products: Product[] = []
+  search = new FormControl('');
 
   constructor(
     private productService: ProductsServiceService,
     private router: Router) { }
 
   ngOnInit(): void {
-    this.productService.getProducts()
+    // this.productService.getProducts()
+    // .subscribe((data)=>this.products=data)
+  }
+
+  onSearch(){
+    this.productService.getProducts(this.search.value)
     .subscribe((data)=>this.products=data)
   }
 

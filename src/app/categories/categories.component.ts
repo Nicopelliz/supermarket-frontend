@@ -51,7 +51,8 @@ export class CategoriesComponent implements OnInit {
     this.categoryService.saveCategory(this.categoriesForm.value, this.isNew).subscribe({
       next: (result) => {
         console.log('result', result)
-        this.router.navigate(['/categories'])
+        this.getData()
+        this.clearForm()
       },
       error: (error) => {
         console.error(error)

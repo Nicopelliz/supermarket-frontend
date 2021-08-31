@@ -29,8 +29,12 @@ export class ProductsServiceService {
     return this.products
   }
 
-  getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.URL)
+  getProducts(search:string): Observable<Product[]> {
+    if (search!==""){
+      return this.http.get<Product[]>(this.URL+"?name="+search) 
+    }else{
+      return this.http.get<Product[]>(this.URL)
+    }
   }
 
   getProductDetail(id: number): Observable<Product> {

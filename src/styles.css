@@ -45,3 +45,7 @@ h3{
 small{
     color: tomato;
 }
+
+textarea{
+    padding: 5px;
+}

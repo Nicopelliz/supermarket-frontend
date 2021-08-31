@@ -10,17 +10,17 @@ import { CategoriesServiceService, Category } from '../services/categories-servi
 })
 export class CategoriesComponent implements OnInit {
 
-  selectedCat: string = "newCat"
+  selectedId: number = 0
   categories: Category[] = []
   category?: Category
   tryWay: string = ""
   try: boolean = true
-  isNew: boolean = false;
+  isNew: boolean = true;
 
   constructor(
     private formBuilder: FormBuilder,
-    private categoryService: CategoriesServiceService,
-    private router: Router) { }
+    private categoryService: CategoriesServiceService
+    ) { }
 
   categoriesForm: FormGroup = this.formBuilder.group({
     category1: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
@@ -38,7 +38,8 @@ export class CategoriesComponent implements OnInit {
 
   onSelect(category: Category) {
     this.categoriesForm.patchValue(category)
-    this.selectedCat = category.category1
+    this.isNew = false
+    this.selectedId = category.catId
   }
 
   onDelete(category: number) {
@@ -48,7 +49,7 @@ export class CategoriesComponent implements OnInit {
   // da vedere come sistemare la put
 
   onSubmit() {
-    this.categoryService.saveCategory(this.categoriesForm.value, this.isNew).subscribe({
+    this.categoryService.saveCategory(this.selectedId ,this.categoriesForm.value, this.isNew).subscribe({
       next: (result) => {
         console.log('result', result)
         this.setCategories()

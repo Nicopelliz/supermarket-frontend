@@ -11,36 +11,42 @@
 
         <div id="title">
             <h3>Details</h3>
-            <button (click)="clearForm()">Clear Form</button>
         </div>
 
         <form [formGroup]="categoriesForm" (ngSubmit)="onSubmit()">
-            <!-- <p>{{categoriesForm.value | json}}</p> -->
-            <div>
+            <p>{{categoriesForm.value | json}}</p>
+            <div class="field">
                 <label for="category1">Category: </label>
+                <div class="small-field" >
                 <input id="category1" type="text" formControlName="category1">
-                <small *ngIf="categoriesForm.get('category1')?.hasError('required')">
-                    This field is required.
-                </small>
-                <small *ngIf="categoriesForm.get('category1')?.hasError('minlength')">
-                    The minimum length for this field is
-                    {{categoriesForm.get('category1')?.errors?.minlength.requiredLength}}
-                    characters.
-                </small>
+                    <small *ngIf="categoriesForm.get('category1')?.hasError('required')">
+                        This field is required.
+                    </small>
+                    <small *ngIf="categoriesForm.get('category1')?.hasError('minlength')">
+                        The minimum length for this field is
+                        {{categoriesForm.get('category1')?.errors?.minlength.requiredLength}}
+                        characters.
+                    </small>
+
+                </div>
             </div>
 
-            <div>
+            <div class="field">
                 <label for="description">Description: </label>
-                <textarea rows="3" cols="28" id="description" type="" formControlName="description"></textarea>
-                <small *ngIf="categoriesForm.get('description')?.hasError('minlength')">
-                    The minimum length for this field is
-                    {{categoriesForm.get('description')?.errors?.minlength.requiredLength}}
-                    characters.
-                </small>
+                <div class="small-field">
+                    <textarea rows="3" cols="28" id="description" type="" formControlName="description"></textarea>
+                    <small *ngIf="categoriesForm.get('description')?.hasError('minlength')">
+                        The minimum length for this field is
+                        {{categoriesForm.get('description')?.errors?.minlength.requiredLength}}
+                        characters.
+                    </small>
+
+                </div>
             </div>
 
-            <button type="submit" [disabled]="!categoriesForm.valid">Submit</button>
+            <button id="submit-cat" type="submit" [disabled]="!categoriesForm.valid">Submit</button>
         </form>
+        <button id="clear-form" (click)="clearForm()">Clear Form</button>
 
     </div>
 </div>

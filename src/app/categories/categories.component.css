@@ -3,11 +3,12 @@
 }
 .wrapper{
     height: 100%;
-    width: 100%;
+    max-width: 800px;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: flex-start;
+    /* background-color: greenyellow; */
 }
 
 #category-list{
@@ -18,21 +19,6 @@
     border-right: 2px solid slategrey ;
 }
 
-#category-detail{
-    flex: 6;
-}
-
-#category-detail > #title{
-    display: flex;
-    flex-direction: row;
-    justify-content:flex-start;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-#title > h3{
-    margin-right: 30px;
-}
 
 .category-button{
     background-color: white;
@@ -54,6 +40,56 @@
     align-items: center;
 }
 
+#category-detail{
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#category-detail > #title{
+    display: flex;
+    flex-direction: row;
+    justify-content:flex-start;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+#title > h3{
+    margin-right: 30px;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 #container{
     padding: 10px;
+}
+
+.field{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.field > label{
+    flex: 1;
+}
+
+.field > .small-field{
+    flex: 3;
+}
+
+.small-field{
+    display: flex;
+    flex-direction: column;
+}
+
+#clear-form, #submit-cat{
+    display: block;
+    margin: 1px 4px;
+    width: 55%;
+    left: 50%;
 }

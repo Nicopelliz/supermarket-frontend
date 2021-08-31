@@ -4,7 +4,7 @@
         <ul>
             <li *ngFor="let category of categories"><button class="category-button"
                     (click)="onSelect(category)">{{category.category1}}</button><button
-                    (click)="onDelete(category.category1)">Delete</button></li>
+                    (click)="onDelete(category.catId)">Delete</button></li>
         </ul>
     </div>
     <div id="category-detail">

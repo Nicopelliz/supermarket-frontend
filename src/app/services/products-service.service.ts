@@ -6,10 +6,10 @@ import { Category } from './categories-service.service';
 export interface Product {
   id: number
   name: string
-  code: string
+  code: number
   price: number
-  expireDate: string
-  category: string
+  expiration: string
+  CatID: number
 }
 
 

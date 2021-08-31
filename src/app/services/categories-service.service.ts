@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 export interface Category{
-  id:number
+  catId:number
   category1:string
   description?:string
 }
@@ -21,7 +21,7 @@ export class CategoriesServiceService {
     return this.http.get<Category[]>(this.URL)
   }
 
-  deleteCategory(category: string): Observable<unknown> {
+  deleteCategory(category: number): Observable<unknown> {
     console.log(category)
     return this.http.delete(this.URL + "/" + category)
   }

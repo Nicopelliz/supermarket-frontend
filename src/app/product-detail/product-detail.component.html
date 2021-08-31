@@ -6,7 +6,7 @@
 
     </div>
     <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
-        <!-- <p>{{productForm.value | json}}</p> -->
+        <p>{{productForm.value | json}}</p>
         <div class="field">
             <label for="name">Name: </label>
             <div class="small-container">
@@ -48,19 +48,19 @@
             </div>
         </div>
         <div class="field">
-            <label for="exp_date">Exp Date: </label>
+            <label for="expiration">Exp Date: </label>
             <div class="small-container">
 
-                <input id="exp_date" type="text" formControlName="exp_date">
+                <input id="expiration" type="date" formControlName="expiration">
             </div>
         </div>
         <div class="field">
             <label for="category">Category: </label>
             <div class="small-container">
 
-                <select name="category" id="category" formControlName="category">
+                <select name="category" id="category" formControlName="catId">
                     <option value="" [defaultSelected]></option>
-                    <option *ngFor="let category of categories" [value]="category.category1">{{category.category1}}
+                    <option *ngFor="let category of categories" [ngValue]="category.catId">{{category.category1}}
                     </option>
                 </select>
                 <!-- <input id="category" type="text" formControlName="category"> -->

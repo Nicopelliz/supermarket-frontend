@@ -41,7 +41,7 @@ export class CategoriesComponent implements OnInit {
     this.selectedCat = category.category1
   }
 
-  onDelete(category: string) {
+  onDelete(category: number) {
     this.categoryService.deleteCategory(category).subscribe((data) => this.setCategories())
   }
 

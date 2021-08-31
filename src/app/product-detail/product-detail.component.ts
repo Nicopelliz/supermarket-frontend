@@ -12,7 +12,6 @@ import {CategoriesComponent} from '../categories/categories.component'
 })
 export class ProductDetailComponent implements OnInit {
 
-
   searchedId: string = "new-product"
   title: string = ""
   products: Product[] = []
@@ -33,9 +32,9 @@ export class ProductDetailComponent implements OnInit {
     name: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
     code: ['', Validators.compose([Validators.required, 
       Validators.minLength(this.codeLenght), Validators.maxLength(this.codeLenght)])],
-    exp_date:[''],
+    expiration:[''],
     price: ['', Validators.compose([Validators.required])],
-    category: ['', Validators.compose([Validators.required])]
+    catId: ['', Validators.compose([Validators.required])]
   })
 
   ngOnInit(): void {
@@ -72,6 +71,7 @@ export class ProductDetailComponent implements OnInit {
   }
   
   onSubmit() {
+    console.log(this.productForm.value)
     this.productService.saveProduct(this.searchedId, this.productForm.value,  this.isNew).subscribe( {
       next: (result) => {
           console.log('result', result)

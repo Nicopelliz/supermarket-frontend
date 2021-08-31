@@ -3,7 +3,7 @@
     <h3>{{title}}</h3>
     <div class="container">
         <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
-            <!-- <p>{{productForm.value | json}}</p> -->
+            <p>{{productForm.value | json}}</p>
             <div class="field">
                 <label for="name">Name: </label>
                 <input id="name" type="text" formControlName="name">
@@ -27,16 +27,24 @@
                 </small>
             </div>
 
-            <div>
+            <div class="field">
                 <label for="price">Price: </label>
                 <input id="price" type="number" step="0.05" formControlName="price">
                 <small *ngIf="productForm.get('price')?.hasError('required')">
                     This field is required.
                 </small>
             </div>
-            <div>
+            <div class="field">
+                <label for="exp_date">Exp Date: </label>
+                <input id="exp_date" type="text" formControlName="exp_date">
+            </div>
+            <div class="field">
                 <label for="category">Category: </label>
-                <input id="category" type="text" formControlName="category">
+                <select name="category" id="category"  formControlName="category">
+                    <option value="" [defaultSelected]></option>
+                    <option *ngFor="let category of categories" [value]="category.category1">{{category.category1}}</option>
+                </select>
+                <!-- <input id="category" type="text" formControlName="category"> -->
                 <small *ngIf="productForm.get('category')?.hasError('required')">
                     This field is required.
                 </small>

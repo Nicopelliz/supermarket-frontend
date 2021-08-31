@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CategoriesServiceService, Category } from '../services/categories-service.service';
 import { Product, ProductsServiceService } from '../services/products-service.service';
+import {CategoriesComponent} from '../categories/categories.component'
 
 @Component({
   selector: 'app-product-detail',
@@ -17,23 +19,29 @@ export class ProductDetailComponent implements OnInit {
   btnSubmit: string = ""
   isNew:boolean = true
   codeLenght:number = 8
+  categories:Category[]=[]
   
   constructor(
     private formBuilder: FormBuilder,
     private productService: ProductsServiceService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private categoryService: CategoriesServiceService
+    ) { }
   
   productForm: FormGroup = this.formBuilder.group({
     name: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
     code: ['', Validators.compose([Validators.required, 
       Validators.minLength(this.codeLenght), Validators.maxLength(this.codeLenght)])],
+    exp_date:[''],
     price: ['', Validators.compose([Validators.required])],
     category: ['', Validators.compose([Validators.required])]
   })
 
   ngOnInit(): void {
 
+    this.setCategories()
+    console.log(this.categories)
     this.searchedId = this.route.snapshot.paramMap.get('id')!
     
     if (this.searchedId !== "new-product") {
@@ -74,7 +82,12 @@ export class ProductDetailComponent implements OnInit {
         alert('Save data error');
     }
   })
-}
+  }
+
+  setCategories() {
+    this.categoryService.getCategories()
+      .subscribe((data: Category[]) => this.categories = data);
+  }
 
   goToProductPage() {
     this.router.navigate(["../../"], { relativeTo: this.route })

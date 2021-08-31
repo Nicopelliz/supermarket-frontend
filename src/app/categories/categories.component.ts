@@ -28,10 +28,10 @@ export class CategoriesComponent implements OnInit {
   })
 
   ngOnInit(): void {
-    this.getData()
+    this.setCategories()
   }
 
-  getData() {
+  setCategories() {
     this.categoryService.getCategories()
       .subscribe((data: Category[]) => this.categories = data);
   }
@@ -42,7 +42,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   onDelete(category: string) {
-    this.categoryService.deleteCategory(category).subscribe((data) => this.getData())
+    this.categoryService.deleteCategory(category).subscribe((data) => this.setCategories())
   }
 
   // da vedere come sistemare la put
@@ -51,7 +51,7 @@ export class CategoriesComponent implements OnInit {
     this.categoryService.saveCategory(this.categoriesForm.value, this.isNew).subscribe({
       next: (result) => {
         console.log('result', result)
-        this.getData()
+        this.setCategories()
         this.clearForm()
       },
       error: (error) => {

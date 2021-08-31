@@ -1,0 +1,15 @@
+:host{
+    width: 100%;
+}
+
+input{
+    margin-bottom: 10px;
+}
+
+
+ul{
+    margin-top: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

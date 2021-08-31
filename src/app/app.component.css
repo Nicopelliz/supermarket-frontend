@@ -1,27 +1,35 @@
+:host{
+    width: 100%;
+}
+
 nav, footer{
     background-color: rgba(85, 181, 177, 0.8);
 }
 
 nav{
-    height: 80px;
+    min-height: 70px;
+    height: 15vh;
     padding: 20px;    
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    align-items:center;
+    scroll-behavior: auto;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+nav>h1{
+    color: rgb(0, 0, 0);
 }
 #main{
     width: 100%;
-    flex: 1;
-    font-size: larger;
+    height: 77vh;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(212, 238, 238);
-    
+    padding: 35px;
+    /* flex-wrap: wrap; */
 }
 footer{
-    height: 45px;
+    min-height: 35px;
+    height: 8vh;
     padding: 4px;
     display: flex;
     justify-content: center;

@@ -1,3 +1,39 @@
+:host{
+    width: 100%;
+}
+.wrapper{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+#category-list{
+    
+    margin-right: 15px;
+    padding-right: 15px;
+    flex: 3;
+    border-right: 2px solid slategrey ;
+}
+
+#category-detail{
+    flex: 6;
+}
+
+#category-detail > #title{
+    display: flex;
+    flex-direction: row;
+    justify-content:flex-start;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+#title > h3{
+    margin-right: 30px;
+}
+
 .category-button{
     background-color: white;
     border: 0.5px solid white;
@@ -14,4 +50,10 @@
 #category-list li{
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#container{
+    padding: 10px;
 }

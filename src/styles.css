@@ -6,8 +6,12 @@
 
 body{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    width: 100%;
+    height: 100%;
 }
 
+
+/* style generici per tutti i piccoli item per uniformare comportamento */
 a{
     text-decoration: none;
     color: black;
@@ -21,6 +25,23 @@ a{
     background-color: rgba(0, 0, 0, 0.1);
 }
 
+
+button, input{
+    padding:3px 5px;
+}
+
 button:hover{
     cursor: pointer;
+}
+
+h1{
+    margin-bottom: 15px;
+}
+
+h3{
+    margin-bottom: 8px;
+}
+
+small{
+    color: tomato;
 }

@@ -1,4 +1,58 @@
+:host{
+    width: 100%;
+}
+
+.container{
+    width: 500px;
+}
+
+#small-header{
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+#small-header > h3{
+    flex: 2;
+}
+
+#small-header > button{
+    width: 40px;
+    flex: 3;
+}
+
 form{
+    width: 100%;
     display: flex;
     flex-direction: column;
+    /* margin-bottom: 5px; */
 }
+
+.field{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.field > label{
+    flex: 1;
+}
+
+.small-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex:4;
+    margin-bottom: 5px;
+}
+
+
+
+#delete, #submit, #back{
+    margin: 1px 4px;
+    width: 55%;
+}
+
+

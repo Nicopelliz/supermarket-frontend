@@ -13,8 +13,9 @@ export class CategoriesComponent implements OnInit {
   selectedCat: string = "newCat"
   categories: Category[] = []
   category?: Category
-  tryWay: string =""
-  try:boolean = true
+  tryWay: string = ""
+  try: boolean = true
+  isNew: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -30,9 +31,9 @@ export class CategoriesComponent implements OnInit {
     this.getData()
   }
 
-  getData(){
+  getData() {
     this.categoryService.getCategories()
-    .subscribe((data: Category[]) => this.categories = data);
+      .subscribe((data: Category[]) => this.categories = data);
   }
 
   onSelect(category: Category) {
@@ -41,32 +42,25 @@ export class CategoriesComponent implements OnInit {
   }
 
   onDelete(category: string) {
-    this.categoryService.deleteCategory(category).subscribe((data)=> this.getData())    
+    this.categoryService.deleteCategory(category).subscribe((data) => this.getData())
   }
 
-  // da vedere come fare questa funzione
-  
-   onSubmit() {
+  // da vedere come sistemare la put
 
-   }
+  onSubmit() {
+    this.categoryService.saveCategory(this.categoriesForm.value, this.isNew).subscribe({
+      next: (result) => {
+        console.log('result', result)
+        this.router.navigate(['/categories'])
+      },
+      error: (error) => {
+        console.error(error)
+        alert('Save data error');
+      }
+    })
+  }
 
-  //   this.getData()
-  //   let cat: Category
-  //   for (cat in this.categories)
-  //   this.categoryService.saveCategory(this.categoriesForm.value,  this.isNew).subscribe( {
-  //     next: (result) => {
-  //         console.log('result', result)
-  //         //Reindirizzo alla lista
-  //         this.router.navigate(['/products'])
-  //   },
-  //   error: (error) => {
-  //       console.error(error)
-  //       alert('Save data error');
-  //   }
-  // })
-  // }
-
-  clearForm(){
-    this.categoriesForm.patchValue({category1: "", description: ""})
+  clearForm() {
+    this.categoriesForm.patchValue({ category1: "", description: "" })
   }
 }

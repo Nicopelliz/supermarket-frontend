@@ -26,10 +26,14 @@ export class CategoriesServiceService {
     return this.http.delete(this.URL + "/" + category)
   }
 
-  saveCategory(category: string){
-
-    console.log(category)
-    
+  saveCategory(data:Category, isNew: boolean){
+    // console.log(category)
+    // if (!isNew) {
+    //   data.id = parseInt(id)
+    //   return this.http.put(this.URL + '/' + id, data)
+    // } else {
+       return this.http.post(this.URL, data)
+    // }
   }
 
 

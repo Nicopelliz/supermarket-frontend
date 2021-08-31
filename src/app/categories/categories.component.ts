@@ -10,8 +10,9 @@ import { CategoriesServiceService, Category } from '../services/categories-servi
 })
 export class CategoriesComponent implements OnInit {
 
-  searchedId: string = "newCat"
+  selectedCat: string = "newCat"
   categories: Category[] = []
+  category?: Category
   tryWay: string =""
   try:boolean = true
 
@@ -21,7 +22,6 @@ export class CategoriesComponent implements OnInit {
     private router: Router) { }
 
   categoriesForm: FormGroup = this.formBuilder.group({
-    id: [],
     category1: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
     description: ['', Validators.minLength(10)],
   })
@@ -37,15 +37,36 @@ export class CategoriesComponent implements OnInit {
 
   onSelect(category: Category) {
     this.categoriesForm.patchValue(category)
+    this.selectedCat = category.category1
   }
 
   onDelete(category: string) {
     this.categoryService.deleteCategory(category).subscribe((data)=> this.getData())    
   }
 
-  onSubmit() {
-    console.log(this.categoriesForm.value.name);
-    console.log(this.categoriesForm.value);
-  }
+  // da vedere come fare questa funzione
+  
+   onSubmit() {
 
+   }
+
+  //   this.getData()
+  //   let cat: Category
+  //   for (cat in this.categories)
+  //   this.categoryService.saveCategory(this.categoriesForm.value,  this.isNew).subscribe( {
+  //     next: (result) => {
+  //         console.log('result', result)
+  //         //Reindirizzo alla lista
+  //         this.router.navigate(['/products'])
+  //   },
+  //   error: (error) => {
+  //       console.error(error)
+  //       alert('Save data error');
+  //   }
+  // })
+  // }
+
+  clearForm(){
+    this.categoriesForm.patchValue({category1: "", description: ""})
+  }
 }

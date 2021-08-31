@@ -16,6 +16,7 @@ export class ProductDetailComponent implements OnInit {
   products: Product[] = []
   btnSubmit: string = ""
   isNew:boolean = true
+  codeLenght:number = 8
   
   constructor(
     private formBuilder: FormBuilder,
@@ -25,16 +26,16 @@ export class ProductDetailComponent implements OnInit {
   
   productForm: FormGroup = this.formBuilder.group({
     name: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
-    code: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(8)])],
+    code: ['', Validators.compose([Validators.required, 
+      Validators.minLength(this.codeLenght), Validators.maxLength(this.codeLenght)])],
     price: ['', Validators.compose([Validators.required])],
     category: ['', Validators.compose([Validators.required])]
   })
 
   ngOnInit(): void {
 
-    this.products = this.productService.getProductsProva()
     this.searchedId = this.route.snapshot.paramMap.get('id')!
-
+    
     if (this.searchedId !== "new-product") {
       this.title = "Edit Product"
       this.btnSubmit = "Save"
@@ -51,15 +52,21 @@ export class ProductDetailComponent implements OnInit {
   }
 
   onDelete(){
-    this.productService.deleteProduct(this.searchedId).subscribe();
-    this.router.navigate(['/products'])
+    this.productService.deleteProduct(this.searchedId).subscribe({next:(result)=>{
+      console.log('result', result)
+      this.router.navigate(['/products'])
+    },
+    error: (error) => {
+      console.error(error)
+      alert('Error deleting data');
+      }
+    });
   }
   
   onSubmit() {
     this.productService.saveProduct(this.searchedId, this.productForm.value,  this.isNew).subscribe( {
       next: (result) => {
           console.log('result', result)
-          //Reindirizzo alla lista
           this.router.navigate(['/products'])
     },
     error: (error) => {

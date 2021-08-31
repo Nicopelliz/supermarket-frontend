@@ -13,8 +13,6 @@ export interface Category{
 })
 export class CategoriesServiceService {
 
-  categories:Category[]=[]
-
   public URL = "https://localhost:5001/api/categories"
 
   constructor(private http:HttpClient ) {}
@@ -23,12 +21,17 @@ export class CategoriesServiceService {
     return this.http.get<Category[]>(this.URL)
   }
 
-  getCategoriesProva():Category[]{
-    return this.categories
-  }
-
   deleteCategory(category: string): Observable<unknown> {
     console.log(category)
     return this.http.delete(this.URL + "/" + category)
   }
+
+  saveCategory(category: string){
+
+    console.log(category)
+    
+  }
+
+
+
 }

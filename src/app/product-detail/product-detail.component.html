@@ -23,7 +23,7 @@
                     This field is required.
                 </small>
                 <small *ngIf="productForm.get('code')?.hasError('minlength') || productForm.get('code')?.hasError('maxlength')">
-                    The field must be of 8 characters.
+                    The field must be of {{codeLenght}} characters.
                 </small>
             </div>
 

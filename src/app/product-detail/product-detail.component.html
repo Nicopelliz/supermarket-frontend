@@ -3,7 +3,7 @@
     <h3>{{title}}</h3>
     <div class="container">
         <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
-            <p>{{productForm.value | json}}</p>
+            <!-- <p>{{productForm.value | json}}</p> -->
             <div class="field">
                 <label for="name">Name: </label>
                 <input id="name" type="text" formControlName="name">

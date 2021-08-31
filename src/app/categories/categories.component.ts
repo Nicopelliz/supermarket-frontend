@@ -12,6 +12,8 @@ export class CategoriesComponent implements OnInit {
 
   searchedId: string = "newCat"
   categories: Category[] = []
+  tryWay: string =""
+  try:boolean = true
 
   constructor(
     private formBuilder: FormBuilder,
@@ -25,8 +27,12 @@ export class CategoriesComponent implements OnInit {
   })
 
   ngOnInit(): void {
+    this.getData()
+  }
+
+  getData(){
     this.categoryService.getCategories()
-      .subscribe((data: Category[]) => this.categories = data);
+    .subscribe((data: Category[]) => this.categories = data);
   }
 
   onSelect(category: Category) {
@@ -34,8 +40,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   onDelete(category: string) {
-    this.categoryService.deleteCategory(category).subscribe();
-    this.router.navigate(["categories"])
+    this.categoryService.deleteCategory(category).subscribe((data)=> this.getData())    
   }
 
   onSubmit() {

@@ -8,7 +8,7 @@
     <h3>Details</h3>
     <div class="container">
         <form [formGroup]="categoriesForm" (ngSubmit)="onSubmit()">
-            <p>{{categoriesForm.value | json}}</p>
+            <!-- <p>{{categoriesForm.value | json}}</p> -->
             <div>
                 <label for="category1">Category: </label>
                 <input id="category1" type="text" formControlName="category1">

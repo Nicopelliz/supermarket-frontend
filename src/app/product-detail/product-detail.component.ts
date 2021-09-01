@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CategoriesServiceService, Category } from '../services/categories-service.service';
 import { Product, ProductsServiceService } from '../services/products-service.service';
 import {CategoriesComponent} from '../categories/categories.component'
+import { getLocaleDateTimeFormat } from '@angular/common';
 
 @Component({
   selector: 'app-product-detail',
@@ -19,7 +20,13 @@ export class ProductDetailComponent implements OnInit {
   isNew:boolean = true
   codeLenght:number = 8
   categories:Category[]=[]
-  
+  dateNow:string=Date()
+  today = new Date();
+  dd = String(this.today.getDate()).padStart(2, '0');
+  mm = String(this.today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  yyyy = this.today.getFullYear();
+  todayEngFormat = this.yyyy + '-' + this.mm + '-' + this.dd
+
   constructor(
     private formBuilder: FormBuilder,
     private productService: ProductsServiceService,
@@ -34,11 +41,11 @@ export class ProductDetailComponent implements OnInit {
       Validators.minLength(this.codeLenght), Validators.maxLength(this.codeLenght)])],
     expiration:[''],
     price: ['', Validators.compose([Validators.required])],
+    imgURL: [''],
     catId: ['', Validators.compose([Validators.required])]
   })
 
   ngOnInit(): void {
-
     this.setCategories()
     console.log(this.categories)
     this.searchedId = this.route.snapshot.paramMap.get('id')!
@@ -48,7 +55,8 @@ export class ProductDetailComponent implements OnInit {
       this.btnSubmit = "Save"
       this.isNew = false
       this.productService.getProductDetail(+this.searchedId)
-        .subscribe((data: Product) => {
+        .subscribe((data: Product) => { 
+          data.expiration = data.expiration?.split('T')[0];
           this.productForm.patchValue(data);
         });
 

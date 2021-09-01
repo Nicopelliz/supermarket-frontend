@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { PhotoApiService } from '../services/photo-api.service';
 import { Product, ProductsServiceService } from '../services/products-service.service';
 
 @Component({
@@ -12,19 +13,24 @@ export class ProductsListComponent implements OnInit {
 
   products: Product[] = []
   search = new FormControl('');
+  result:any;
+  results: any[]=[];
 
   constructor(
     private productService: ProductsServiceService,
-    private router: Router) { }
+    private router: Router,
+    private photoAPI:PhotoApiService) { }
 
   ngOnInit(): void {
-    // this.productService.getProducts()
-    // .subscribe((data)=>this.products=data)
   }
 
   onSearch(){
     this.productService.getProducts(this.search.value)
-    .subscribe((data)=>this.products=data)
+    .subscribe({next:(data)=>{
+      this.products=data
+      console.log(this.products)  
+      }
+    })
   }
 
   createProduct() {

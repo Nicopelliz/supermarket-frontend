@@ -8,7 +8,8 @@ export interface Product {
   name: string
   code: number
   price: number
-  expiration: string
+  imgURL?: string
+  expiration?: string
   CatID: number
 }
 

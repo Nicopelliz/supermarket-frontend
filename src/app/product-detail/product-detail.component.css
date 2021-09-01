@@ -41,7 +41,7 @@ form{
 
 .small-container{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: flex-start;
     align-items: flex-start;
     flex:4;
@@ -50,9 +50,21 @@ form{
 
 
 
-#delete, #submit, #back{
+.delete, .submit, .back{
     margin: 1px 4px;
     width: 55%;
+}
+
+#imgURL{
+    padding-right: 35px;
+    height: 26px;
+    width: 183px;
+
+}
+
+.search {
+    width:35px;
+    margin-left:-35px;
 }
 
 

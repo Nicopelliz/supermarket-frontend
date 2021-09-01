@@ -2,15 +2,12 @@
 <div class="container">
     <div id="small-header">
         <h3>{{title}}</h3>
-        
-
     </div>
     <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
         <p>{{productForm.value | json}}</p>
         <div class="field">
             <label for="name">Name: </label>
             <div class="small-container">
-
                 <input id="name" type="text" formControlName="name">
                 <small *ngIf="productForm.get('firstName')?.hasError('required')">
                     This field is required.
@@ -21,7 +18,6 @@
                 </small>
             </div>
         </div>
-
         <div class="field">
             <label for="code">Code: </label>
             <div class="small-container">
@@ -33,14 +29,11 @@
                     *ngIf="productForm.get('code')?.hasError('minlength') || productForm.get('code')?.hasError('maxlength')">
                     The field must be of {{codeLenght}} characters.
                 </small>
-
             </div>
         </div>
-
         <div class="field">
             <label for="price">Price: </label>
             <div class="small-container">
-
                 <input id="price" type="number" step="0.05" formControlName="price">
                 <small *ngIf="productForm.get('price')?.hasError('required')">
                     This field is required.
@@ -50,14 +43,20 @@
         <div class="field">
             <label for="expiration">Exp Date: </label>
             <div class="small-container">
-
-                <input id="expiration" type="date" formControlName="expiration">
+                <input id="expiration" type="date" min="{{todayEngFormat}}" formControlName="expiration">
             </div>
         </div>
         <div class="field">
+            <label for="imgURL">Image URL: </label>
+            <div class="small-container">
+                <input id="imgURL" type="text" formControlName="imgURL">
+                <button class="search fa fa-search"></button>
+            </div>
+        </div>
+        <div class="field"></div>
+        <div class="field">
             <label for="category">Category: </label>
             <div class="small-container">
-
                 <select name="category" id="category" formControlName="catId">
                     <option value="" [defaultSelected]></option>
                     <option *ngFor="let category of categories" [ngValue]="category.catId">{{category.category1}}
@@ -69,8 +68,8 @@
                 </small>
             </div>
         </div>
-        <button id="submit" type="submit" [disabled]="!productForm.valid">{{btnSubmit}}</button>
+        <button class="submit" type="submit" [disabled]="!productForm.valid">{{btnSubmit}}</button>
     </form>
-    <button id="delete" type="text" *ngIf="!isNew" (click)="onDelete()">Delete</button>
-    <button id="back" (click)="goToProductPage()">back</button>
+    <button class="delete" type="text" *ngIf="!isNew" (click)="onDelete()">Delete</button>
+    <button class="back" (click)="goToProductPage()">back</button>
 </div>

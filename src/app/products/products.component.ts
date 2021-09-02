@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Product } from '../services/products-service.service';
 
 @Component({
   selector: 'app-products',
@@ -9,7 +10,11 @@ export class ProductsComponent implements OnInit {
 
   constructor() { }
 
+  
+  daCancel: any;
+
   ngOnInit(): void {
+    console.log(this.daCancel)
   }
 
 }

@@ -1,12 +1,11 @@
 <button (click)="createProduct()">Create new product</button>
 <input type="text" [formControl]="search"> <button (click)="onSearch()">search</button>
-<ul>
+<ul id="list-products">
     <li *ngFor="let product of products">
         <div class="img">
             <img src="{{product.imgURL}}" alt="">
         </div>
         <p>{{product.name}} - {{product.price}}$</p>
-        <button (click)="getDetail(product)">Detail</button>
-    
+        <button (click)="getDetail(product)">Detail</button>   
     </li>
 </ul>

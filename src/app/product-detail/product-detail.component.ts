@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoriesServiceService, Category } from '../services/categories-service.service';
 import { Product, ProductsServiceService } from '../services/products-service.service';
-import {CategoriesComponent} from '../categories/categories.component'
-import { getLocaleDateTimeFormat } from '@angular/common';
+import { PhotoApiService } from '../services/photo-api.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -26,13 +25,18 @@ export class ProductDetailComponent implements OnInit {
   mm = String(this.today.getMonth() + 1).padStart(2, '0'); //January is 0!
   yyyy = this.today.getFullYear();
   todayEngFormat = this.yyyy + '-' + this.mm + '-' + this.dd
+  searchWindowOpen = false
+  searchTerm:string=""
+  photos:any;
+  
 
   constructor(
     private formBuilder: FormBuilder,
     private productService: ProductsServiceService,
     private route: ActivatedRoute,
     private router: Router,
-    private categoryService: CategoriesServiceService
+    private categoryService: CategoriesServiceService,
+    private photoService: PhotoApiService
     ) { }
   
   productForm: FormGroup = this.formBuilder.group({
@@ -40,7 +44,7 @@ export class ProductDetailComponent implements OnInit {
     code: ['', Validators.compose([Validators.required, 
       Validators.minLength(this.codeLenght), Validators.maxLength(this.codeLenght)])],
     expiration:[''],
-    price: ['', Validators.compose([Validators.required])],
+    price: ['', Validators.compose([Validators.required, Validators.min(0)])],
     imgURL: [''],
     catId: ['', Validators.compose([Validators.required])]
   })
@@ -58,6 +62,7 @@ export class ProductDetailComponent implements OnInit {
         .subscribe((data: Product) => { 
           data.expiration = data.expiration?.split('T')[0];
           this.productForm.patchValue(data);
+          this.searchTerm = this.productForm.value.name
         });
 
     } else {
@@ -99,5 +104,33 @@ export class ProductDetailComponent implements OnInit {
 
   goToProductPage() {
     this.router.navigate(["../../"], { relativeTo: this.route })
+  }
+
+  changeWindow(){
+    if (this.searchWindowOpen)
+    {
+      this.searchWindowOpen=false
+    }
+    else{
+      this.searchWindowOpen=true
+      this.onSearch()
+    }
+  }
+
+  onSearch(){
+    this.photoService.getPhotos(this.searchTerm).subscribe((data)=>{
+      this.photos=data["results"]
+      console.log(this.photos)
+    })
+  }
+
+  changeSearchTearm(event:any){
+    this.searchTerm = event.value;
+    console.log(this.searchTerm);
+ }
+
+  choosePhoto(photoURL: string){
+    this.changeWindow()
+    this.productForm.patchValue({imgURL: photoURL})
   }
 }

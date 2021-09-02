@@ -1,5 +1,8 @@
 :host{
-    width: 100%;
+    display: block;
+    min-height: 100vh;
+    --custom-navheight:65px;
+    --custom-footerheight:40px;
 }
 
 nav, footer{
@@ -7,8 +10,8 @@ nav, footer{
 }
 
 nav{
-    min-height: 70px;
-    height: 15vh;
+    height: VAR(--custom-navheight);
+    margin-bottom: -65px;
     padding: 20px;    
     display: flex;
     flex-direction: row;
@@ -16,22 +19,23 @@ nav{
     align-items:center;
     scroll-behavior: auto;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    z-index: 2;
 }
-nav>h1{
-    color: rgb(0, 0, 0);
+nav h1{
+    margin-bottom: 0;
 }
 #main{
     width: 100%;
-    height: 77vh;
+    min-height: 100vh;
     display: flex;
-    padding: 35px;
-    /* flex-wrap: wrap; */
+    padding: 100px 35px 75px;
 }
 footer{
-    min-height: 35px;
-    height: 8vh;
+    height: var(--custom-footerheight);
+    margin-top: -40px;
     padding: 4px;
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 2;
 }

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute, ParamMap } from '@angular/router';
+import { EventEmitter } from '@angular/core';
 import { PhotoApiService } from '../services/photo-api.service';
 import { Product, ProductsServiceService } from '../services/products-service.service';
 
@@ -11,6 +12,10 @@ import { Product, ProductsServiceService } from '../services/products-service.se
 })
 export class ProductsListComponent implements OnInit {
 
+  @Output() redirect: EventEmitter<String>=new EventEmitter() 
+
+  daCanc : string = "ciao" 
+
   products: Product[] = []
   search = new FormControl('');
   result:any;
@@ -19,16 +24,21 @@ export class ProductsListComponent implements OnInit {
   constructor(
     private productService: ProductsServiceService,
     private router: Router,
-    private photoAPI:PhotoApiService) { }
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    let allParams = this.route.snapshot.paramMap.get("")
+    console.log(allParams)
   }
+
 
   onSearch(){
     this.productService.getProducts(this.search.value)
     .subscribe({next:(data)=>{
       this.products=data
-      console.log(this.products)  
+      console.log(this.products) 
+      // this.redirect.emit(this.products)
+      this.redirect.emit(this.daCanc) 
       }
     })
   }

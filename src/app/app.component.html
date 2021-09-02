@@ -1,17 +1,17 @@
+<!-- principale disposizione pagina -->
+<nav>
+  <div>
+     <h1>Your Favourite Supermarket</h1> 
+  </div>
+  <div>
+    <a routerLink="products" routerLinkActive="active">Products</a>
+    <a routerLink="categories" routerLinkActive="active">Categories</a>
+  </div>
+</nav>
 
-  
-    <nav>
-      <h1 class="title">Your Favourite Supermarket</h1>
-      <div>
-        <a routerLink="products" routerLinkActive="active">Products</a>
-        <a routerLink="categories" routerLinkActive="active">Categories</a>
+<div id="main">
 
-      </div>
-    </nav>
-  
- <div id="main">
+  <router-outlet></router-outlet>
+</div>
 
-   <router-outlet></router-outlet>
- </div>
-
-  <footer>copyright 2021 My Beautiful Supermarket</footer>
+<footer>copyright 2021 My Beautiful Supermarket</footer>

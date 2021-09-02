@@ -9,8 +9,9 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { ProductsListComponent } from './products-list/products-list.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { HttpClientModule } from '@angular/common/http'
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

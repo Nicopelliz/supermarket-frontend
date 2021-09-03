@@ -28,7 +28,9 @@ export class CategoriesServiceService {
 
   saveCategory(id:number,data:Category, isNew: boolean){
     console.log(data)
+    
     if (!isNew) {
+      data.catId = id
       console.log(data.catId)
       return this.http.put(this.URL + '/' + id, data)
     } else {

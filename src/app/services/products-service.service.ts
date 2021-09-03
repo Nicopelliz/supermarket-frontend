@@ -9,19 +9,17 @@ export interface Product {
   code: number
   price: number
   imgURL?: string
-  expiration?: string
+  expiration?: string | null
   CatID: number
 }
-
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class ProductsServiceService {
 
-
   URL = "https://localhost:5001/api/articles"
-
   products: Product[] = []
 
   constructor(private http: HttpClient) { }
@@ -30,10 +28,10 @@ export class ProductsServiceService {
     return this.products
   }
 
-  getProducts(search:string): Observable<Product[]> {
-    if (search!==""){
-      return this.http.get<Product[]>(this.URL+"?name="+search) 
-    }else{
+  getProducts(search: string): Observable<Product[]> {
+    if (search !== "") {
+      return this.http.get<Product[]>(this.URL + "?name=" + search)
+    } else {
       return this.http.get<Product[]>(this.URL)
     }
   }
@@ -46,8 +44,10 @@ export class ProductsServiceService {
     return this.http.delete(this.URL + "/" + id)
   }
 
-  saveProduct(id:string, data:Product, isNew: boolean) {
-    
+  saveProduct(id: string, data: Product, isNew: boolean) {
+    if (data.expiration === "") {
+      data.expiration = null
+    }
     if (!isNew) {
       data.id = parseInt(id)
       return this.http.put(this.URL + '/' + id, data)

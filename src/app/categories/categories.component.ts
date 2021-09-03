@@ -40,6 +40,7 @@ export class CategoriesComponent implements OnInit {
     this.categoriesForm.patchValue(category)
     this.isNew = false
     this.selectedId = category.catId
+    console.log(category, this.isNew)
   }
 
   onDelete(category: number) {
@@ -49,6 +50,7 @@ export class CategoriesComponent implements OnInit {
   // da vedere come sistemare la put
 
   onSubmit() {
+    console.log(this.selectedId, this.isNew)
     this.categoryService.saveCategory(this.selectedId ,this.categoriesForm.value, this.isNew).subscribe({
       next: (result) => {
         console.log('result', result)
@@ -63,6 +65,9 @@ export class CategoriesComponent implements OnInit {
   }
 
   clearForm() {
+    console.log(this.isNew)
     this.categoriesForm.patchValue({ category1: "", description: "" })
+    this.isNew = true
+    console.log(this.isNew)
   }
 }

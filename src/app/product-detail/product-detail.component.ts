@@ -16,19 +16,19 @@ export class ProductDetailComponent implements OnInit {
   title: string = ""
   products: Product[] = []
   btnSubmit: string = ""
-  isNew:boolean = true
-  codeLenght:number = 8
-  categories:Category[]=[]
-  dateNow:string=Date()
+  isNew: boolean = true
+  codeLenght: number = 8
+  categories: Category[] = []
+  dateNow: string = Date()
   today = new Date();
   dd = String(this.today.getDate()).padStart(2, '0');
   mm = String(this.today.getMonth() + 1).padStart(2, '0'); //January is 0!
   yyyy = this.today.getFullYear();
   todayEngFormat = this.yyyy + '-' + this.mm + '-' + this.dd
   searchWindowOpen = false
-  searchTerm:string=""
-  photos:any;
-  
+  searchTerm: string = ""
+  photos: any;
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -37,13 +37,13 @@ export class ProductDetailComponent implements OnInit {
     private router: Router,
     private categoryService: CategoriesServiceService,
     private photoService: PhotoApiService
-    ) { }
-  
+  ) { }
+
   productForm: FormGroup = this.formBuilder.group({
     name: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
-    code: ['', Validators.compose([Validators.required, 
-      Validators.minLength(this.codeLenght), Validators.maxLength(this.codeLenght)])],
-    expiration:[''],
+    code: ['', Validators.compose([Validators.required,
+    Validators.minLength(this.codeLenght), Validators.maxLength(this.codeLenght)])],
+    expiration: [''],
     price: ['', Validators.compose([Validators.required, Validators.min(0)])],
     imgURL: [''],
     catId: ['', Validators.compose([Validators.required])]
@@ -53,13 +53,13 @@ export class ProductDetailComponent implements OnInit {
     this.setCategories()
     console.log(this.categories)
     this.searchedId = this.route.snapshot.paramMap.get('id')!
-    
+
     if (this.searchedId !== "new-product") {
       this.title = "Edit Product"
       this.btnSubmit = "Save"
       this.isNew = false
       this.productService.getProductDetail(+this.searchedId)
-        .subscribe((data: Product) => { 
+        .subscribe((data: Product) => {
           data.expiration = data.expiration?.split('T')[0];
           this.productForm.patchValue(data);
           this.searchTerm = this.productForm.value.name
@@ -71,30 +71,34 @@ export class ProductDetailComponent implements OnInit {
     }
   }
 
-  onDelete(){
-    this.productService.deleteProduct(this.searchedId).subscribe({next:(result)=>{
-      console.log('result', result)
-      this.router.navigate(['/products'])
-    },
-    error: (error) => {
-      console.error(error)
-      alert('Error deleting data');
+  onDelete() {
+    this.productService.deleteProduct(this.searchedId).subscribe({
+      next: (result) => {
+        console.log('result', result)
+        this.router.navigate(['/products'])
+      },
+      error: (error) => {
+        console.error(error)
+        alert('Error deleting data');
       }
     });
   }
-  
+
   onSubmit() {
     console.log(this.productForm.value)
-    this.productService.saveProduct(this.searchedId, this.productForm.value,  this.isNew).subscribe( {
+    if (this.productForm.value.expiration === "") {
+      this.productForm.patchValue({ expiration: null })
+    }
+    this.productService.saveProduct(this.searchedId, this.productForm.value, this.isNew).subscribe({
       next: (result) => {
-          console.log('result', result)
-          this.router.navigate(['/products'])
-    },
-    error: (error) => {
+        console.log('result', result)
+        this.router.navigate(['/products'])
+      },
+      error: (error) => {
         console.error(error)
         alert('Save data error');
-    }
-  })
+      }
+    })
   }
 
   setCategories() {
@@ -106,31 +110,30 @@ export class ProductDetailComponent implements OnInit {
     this.router.navigate(["../../"], { relativeTo: this.route })
   }
 
-  changeWindow(){
-    if (this.searchWindowOpen)
-    {
-      this.searchWindowOpen=false
+  changeWindow() {
+    if (this.searchWindowOpen) {
+      this.searchWindowOpen = false
     }
-    else{
-      this.searchWindowOpen=true
+    else {
+      this.searchWindowOpen = true
       this.onSearch()
     }
   }
 
-  onSearch(){
-    this.photoService.getPhotos(this.searchTerm).subscribe((data)=>{
-      this.photos=data["results"]
+  onSearch() {
+    this.photoService.getPhotos(this.searchTerm).subscribe((data) => {
+      this.photos = data["results"]
       console.log(this.photos)
     })
   }
 
-  changeSearchTearm(event:any){
+  changeSearchTearm(event: any) {
     this.searchTerm = event.value;
     console.log(this.searchTerm);
- }
+  }
 
-  choosePhoto(photoURL: string){
+  choosePhoto(photoURL: string) {
     this.changeWindow()
-    this.productForm.patchValue({imgURL: photoURL})
+    this.productForm.patchValue({ imgURL: photoURL })
   }
 }

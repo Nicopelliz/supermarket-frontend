@@ -1,29 +1,41 @@
 :host{
+    display: block;
     width: 100%;
+    /* background-color: hotpink; */
+}
+
+#search-bar{
+    width: 100%; 
 }
 
 input{
     margin-bottom: 10px;
 }
 
-
-ul{
-    margin-top: 5px;
+#list-products{
+    width: 100%;
+    margin-top: 15px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;    
+    align-items: center;
+    flex-shrink: initial;
+    /* background-color: indianred; */
 }
 
 li{
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
+    width: 100%;
+    max-width: 550px;
+    margin-top: 2px;
     padding: 0 10px;
+    /* background-color: indigo; */
 }
 
 li> .img{
-flex: 3; 
+flex: 4; 
 }
 li>p{
     flex:4
@@ -33,8 +45,8 @@ li>button{
 }
 
 img{
-   width: 100px;
-   height: 60px;
+   width: 150px;
+   height: 100px;
    object-fit: cover; 
    border:1px solid black;
    border-radius: 2px;

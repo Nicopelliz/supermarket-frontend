@@ -18,7 +18,7 @@
             <div class="field">
                 <label for="category1">Name: </label>
                 <div class="small-field">
-                    <input id="category1" type="text" formControlName="category1">
+                    <input id="category1" maxlength="50" type="text" formControlName="category1">
                     <small *ngIf="categoriesForm.get('category1')?.hasError('required')">
                         This field is required.
                     </small>

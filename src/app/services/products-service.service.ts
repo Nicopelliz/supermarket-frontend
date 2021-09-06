@@ -24,10 +24,7 @@ export class ProductsServiceService {
 
   constructor(private http: HttpClient) { }
 
-  getProductsProva(): Product[] {
-    return this.products
-  }
-
+  // http GET
   getProducts(search: string): Observable<Product[]> {
     if (search !== "") {
       return this.http.get<Product[]>(this.URL + "?name=" + search)
@@ -36,14 +33,18 @@ export class ProductsServiceService {
     }
   }
 
+
+  // http GET/ID
   getProductDetail(id: number): Observable<Product> {
     return this.http.get<Product>(this.URL + "/" + id)
   }
 
+  // http DELETE
   deleteProduct(id: string): Observable<unknown> {
     return this.http.delete(this.URL + "/" + id)
   }
 
+  // http POST & PUT
   saveProduct(id: string, data: Product, isNew: boolean) {
     if (data.expiration === "") {
       data.expiration = null

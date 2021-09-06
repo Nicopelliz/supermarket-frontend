@@ -7,7 +7,7 @@
         <div class="field">
             <label for="name">Name: </label>
             <div class="small-container">
-                <input id="name" type="text" formControlName="name" (keyup)="changeSearchTearm($event.target)">
+                <input id="name" type="text" formControlName="name" maxlength="50" (keyup)="changeSearchTearm($event.target)">
                 <small *ngIf="productForm.get('name')?.hasError('required')">
                     This field is required.
                 </small>

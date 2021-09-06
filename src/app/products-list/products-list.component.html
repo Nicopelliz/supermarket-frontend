@@ -1,6 +1,8 @@
-<button (click)="createProduct()">Create new product</button>
-<input type="text" [formControl]="search"> <button (click)="onSearch()">search</button>
-<ul id="list-products">
+<div id="search-bar">
+    <button (click)="createProduct()">Create new product</button>
+    <input type="text" [formControl]="search"> <button (click)="onSearch()">search</button>
+</div>
+<div id="list-products">
     <li *ngFor="let product of products">
         <div class="img">
             <img src="{{product.imgURL}}" alt="">
@@ -8,4 +10,4 @@
         <p>{{product.name}} - {{product.price}}$</p>
         <button (click)="getDetail(product)">Detail</button>   
     </li>
-</ul>
+</div>

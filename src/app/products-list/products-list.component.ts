@@ -37,7 +37,6 @@ export class ProductsListComponent implements OnInit {
     .subscribe({next:(data)=>{
       this.products=data
       console.log(this.products) 
-      // this.redirect.emit(this.products)
       this.redirect.emit(this.daCanc) 
       }
     })

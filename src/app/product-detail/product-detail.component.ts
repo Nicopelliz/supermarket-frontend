@@ -49,7 +49,10 @@ export class ProductDetailComponent implements OnInit {
     catId: ['', Validators.compose([Validators.required])]
   })
 
+
   ngOnInit(): void {
+
+    // set the category field
     this.setCategories()
     console.log(this.categories)
     this.searchedId = this.route.snapshot.paramMap.get('id')!
@@ -71,6 +74,7 @@ export class ProductDetailComponent implements OnInit {
     }
   }
 
+  // delete product
   onDelete() {
     this.productService.deleteProduct(this.searchedId).subscribe({
       next: (result) => {
@@ -84,11 +88,20 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
+  // create or update Product
   onSubmit() {
     console.log(this.productForm.value)
+
+    // make null if no datetime
     if (this.productForm.value.expiration === "") {
       this.productForm.patchValue({ expiration: null })
     }
+
+    // default image if no IMAGE
+    if (this.productForm.value.imgURL === ""){
+      this.productForm.value.imgURL = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png"
+    }
+    
     this.productService.saveProduct(this.searchedId, this.productForm.value, this.isNew).subscribe({
       next: (result) => {
         console.log('result', result)

@@ -71,10 +71,6 @@
     flex: 6;
 }
 
-.small-field > textarea{
-    
-}
-
 .small-field{
     display: flex;
     flex-direction: column;

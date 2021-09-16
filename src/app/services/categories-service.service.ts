@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Product } from './products-service.service';
 
 export interface Category{
   catId:number
@@ -12,6 +13,7 @@ export interface Category{
   providedIn: 'root'
 })
 export class CategoriesServiceService {
+
 
   public URL = "https://localhost:5001/api/categories"
 
@@ -37,7 +39,4 @@ export class CategoriesServiceService {
        return this.http.post(this.URL, data)
     }
   }
-
-
-
 }

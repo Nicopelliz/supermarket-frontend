@@ -25,12 +25,42 @@ export class ProductsServiceService {
   constructor(private http: HttpClient) { }
 
   // http GET
-  getProducts(search: string): Observable<Product[]> {
+  getProducts(search: string, catID: number, minPrice:number, maxPrice: number): Observable<Product[]> {
+
+    // soluzione PROF
+    let searchCat = "";
+    let minPriceStr = "";
+    let maxPriceStr = "";
+    console.log(catID)
     if (search !== "") {
-      return this.http.get<Product[]>(this.URL + "?name=" + search)
-    } else {
-      return this.http.get<Product[]>(this.URL)
+      search = "?name=" + search
     }
+    if (catID !== null) {
+      searchCat = (search===""?"?":"&") + "catId=" + catID
+    }
+    if (minPrice !== null && (catID !== null || search !=="")){
+      minPriceStr = "&priceMin=" + minPrice
+    }else if(minPrice !==null && catID === null && search === ""){
+      minPriceStr = "?priceMin=" + minPrice
+    }
+    if (maxPrice !== null && (catID !== null || minPrice !== null || search !=="")){
+      maxPriceStr = "&priceMax=" + maxPrice
+    }else if (maxPrice !== null && catID === null && minPrice === null && search ===""){
+      maxPriceStr = "?priceMax=" + maxPrice
+    }
+    return this.http.get<Product[]>(this.URL + search + searchCat + minPriceStr + maxPriceStr)
+
+    // soluzione TEDIOSA MIA
+
+    // if (search !== "") {
+    //   return this.http.get<Product[]>(this.URL + "?name=" + search)
+    // } else if (catID) {
+    //   return this.http.get<Product[]>(this.URL + "?catId=" + catID)
+    // } else if (search !== "" && catID) {
+    //   return this.http.get<Product[]>(this.URL + "?catId=" + catID + "?name=" + search)
+    // } else {
+    //   return this.http.get<Product[]>(this.URL)
+    // }
   }
 
 

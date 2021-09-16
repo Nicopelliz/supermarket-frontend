@@ -21,7 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
     ProductDetailComponent,
     PageNotFoundComponent,
     HomepageComponent,
-    ProductsListComponent
+    ProductsListComponent,
   ],
   imports: [
     BrowserModule,

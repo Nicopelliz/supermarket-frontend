@@ -14,7 +14,6 @@ export class ProductsComponent implements OnInit {
   daCancel: any;
 
   ngOnInit(): void {
-    console.log(this.daCancel)
   }
 
 }

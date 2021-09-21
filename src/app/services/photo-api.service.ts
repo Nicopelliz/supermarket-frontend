@@ -13,7 +13,6 @@ export class PhotoApiService {
 
 
   getPhotos(searchTerm:string):Observable<any>{ 
-    console.log(searchTerm)
     return this.http.get(this.URL+searchTerm)
   }
 }

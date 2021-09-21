@@ -31,7 +31,6 @@ export class ProductsServiceService {
     let searchCat = "";
     let minPriceStr = "";
     let maxPriceStr = "";
-    console.log(catID)
     if (search !== "") {
       search = "?name=" + search
     }

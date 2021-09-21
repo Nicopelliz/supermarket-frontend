@@ -24,16 +24,13 @@ export class CategoriesServiceService {
   }
 
   deleteCategory(category: number): Observable<unknown> {
-    console.log(category)
     return this.http.delete(this.URL + "/" + category)
   }
 
   saveCategory(id:number,data:Category, isNew: boolean){
-    console.log(data)
     
     if (!isNew) {
       data.catId = id
-      console.log(data.catId)
       return this.http.put(this.URL + '/' + id, data)
     } else {
        return this.http.post(this.URL, data)

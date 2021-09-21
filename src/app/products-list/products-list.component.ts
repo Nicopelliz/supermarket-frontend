@@ -33,8 +33,6 @@ export class ProductsListComponent implements OnInit {
     private categoryService: CategoriesServiceService) { }
 
   ngOnInit(): void {
-    let allParams = this.route.snapshot.paramMap.get("")
-    console.log(allParams)
     this.setCategories()
   }
 
@@ -44,11 +42,9 @@ export class ProductsListComponent implements OnInit {
   }
 
   onSearch(){
-    console.log(this.search.value, this.catID.value, this.minPrice.value, this.maxPrice.value)
     this.productService.getProducts(this.search.value, this.catID.value, this.minPrice.value, this.maxPrice.value)
     .subscribe({next:(data)=>{
-      this.products=data
-      console.log(this.products) 
+      this.products=data 
       this.redirect.emit(this.daCanc) 
       }
     })

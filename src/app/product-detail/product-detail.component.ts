@@ -54,7 +54,6 @@ export class ProductDetailComponent implements OnInit {
 
     // set the category field
     this.setCategories()
-    console.log(this.categories)
     this.searchedId = this.route.snapshot.paramMap.get('id')!
 
     if (this.searchedId !== "new-product") {
@@ -90,7 +89,6 @@ export class ProductDetailComponent implements OnInit {
 
   // create or update Product
   onSubmit() {
-    console.log(this.productForm.value)
 
     // make null if no datetime
     if (this.productForm.value.expiration === "") {
